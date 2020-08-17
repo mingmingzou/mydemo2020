@@ -16,6 +16,7 @@ class demoApplicationTests {
         Login login = new Login();
         try {
             int login1 = loginService.login(login);
+            System.out.println(login1);
         } catch (Exception e) {
             e.printStackTrace();
         }
