@@ -2,19 +2,22 @@ package com.mydemo.demo.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.apache.shiro.web.subject.WebSubject;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
 import java.util.Set;
 
+/*
+* Realm的配置
+* author:zmm
+* */
 @Slf4j
 public class MyShiroRealm extends AuthorizingRealm {
     @Override
@@ -40,6 +43,28 @@ public class MyShiroRealm extends AuthorizingRealm {
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        return null;
+        log.info("开始认证(doGetAuthenticationInfo)");
+        //UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
+        HttpServletRequest request = (HttpServletRequest) ((WebSubject) SecurityUtils
+                .getSubject()).getServletRequest();
+        UsernamePasswordToken token = new UsernamePasswordToken(request.getParameter("userName"), request.getParameter("password"));
+        //获取用户输入的账号
+        String userName = (String) token.getPrincipal();
+        //通过userName去数据库中匹配用户信息，通过查询用户的情况做下面的处理
+        //这里暂时就直接写死,根据登录用户账号的情况做处理
+        log.info("账号：" + userName);
+        if ("passwordError".equals(userName)) {//密码错误
+            throw new IncorrectCredentialsException();
+        } else if ("lockAccount".equals(userName)) {// 用户锁定
+            throw new LockedAccountException();
+        } else {
+            SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
+                    userName, //用户名
+                    "123456", //密码，写死
+                    ByteSource.Util.bytes(userName + "salt"),//salt=username+salt
+                    getName()  //realm name
+            );
+            return authenticationInfo;
+        }
     }
 }

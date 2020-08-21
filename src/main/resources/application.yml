@@ -8,6 +8,7 @@ spring:
     host: 123.56.229.155
     port: 6379
     timeout: 10000
+
 server:
   port: 8081
 
