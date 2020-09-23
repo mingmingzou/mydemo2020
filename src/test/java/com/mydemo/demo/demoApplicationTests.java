@@ -1,5 +1,6 @@
 package com.mydemo.demo;
 
+import com.mydemo.demo.login.entity.DTO.LoginDTO;
 import com.mydemo.demo.login.entity.PO.Login;
 import com.mydemo.demo.login.service.LoginService;
 import org.junit.jupiter.api.Test;
@@ -13,10 +14,11 @@ class demoApplicationTests {
     LoginService loginService;
     @Test
     void contextLoads() {
-        Login login = new Login();
+        Login login =new Login();
         try {
-            int login1 = loginService.login(login);
-            System.out.println(login1);
+            login.setUsername("zmm");
+            LoginDTO user = loginService.getUser(login.getUsername());
+            System.out.println(user);
         } catch (Exception e) {
             e.printStackTrace();
         }
