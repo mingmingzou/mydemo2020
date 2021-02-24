@@ -11,7 +11,7 @@ public class consumer {
         Connection connection = easy.getConnection();
         Channel channel = connection.createChannel();
         //声明通道
-        channel.queueDeclare("QUEUE_NAME",false,false,false,null);
+        channel.queueDeclare("QUEUE_NAME2",false,false,false,null);
         //监听队列
         Consumer consumer = new DefaultConsumer(channel) {
             @Override
@@ -21,7 +21,7 @@ public class consumer {
                 System.out.println(" [Consumer] Received '" + message + "'");
             }
         };
-        channel.basicConsume("QUEUE_NAME", true, consumer);
+        channel.basicConsume("QUEUE_NAME2", true, consumer);
 
     }
 }

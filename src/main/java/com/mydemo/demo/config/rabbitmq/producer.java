@@ -14,7 +14,7 @@ public class producer {
         channel.queueDeclare("QUEUE_NAME",false,false,false,null);
         //消息内容
         String message = "Hello World!";
-        channel.basicPublish("","QUEUE_NAME",null,message.getBytes());
+        channel.basicPublish("","QUEUE_NAME2",null,message.getBytes());
         System.out.println("发送消息："+message);
         //关闭连接和通道
         channel.close();

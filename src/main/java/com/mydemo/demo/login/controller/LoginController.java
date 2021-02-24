@@ -4,11 +4,13 @@ import com.mydemo.demo.common.entity.Message;
 import com.mydemo.demo.common.enums.Errcode;
 import com.mydemo.demo.login.entity.PO.Login;
 import com.mydemo.demo.login.service.LoginService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
+@Api(tags = "登录")
 @RestController
 @RequestMapping(value = "/login")
 @Slf4j
@@ -30,6 +32,7 @@ public class LoginController {
         return new Message().rest(Errcode.E_1001);
     }
 
+    @ApiOperation("登录：密码登录type=pwd，手机验证码登录type=phone")
     @PostMapping("/login")
     public Message doLogin(Login login){
         log.info("进入登录处理");
