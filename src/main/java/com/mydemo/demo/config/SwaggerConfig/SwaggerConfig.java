@@ -35,7 +35,7 @@ public class SwaggerConfig {
                 .groupName("我的demo接口文档")
                 .select()
                 //这里指定Controller扫描包路径
-                .apis(RequestHandlerSelectors.basePackage("com.mydemo.demo.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.mydemo.demo.login.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .ignoredParameterTypes(HttpSession.class, HttpServletRequest.class, HttpServletResponse.class)//统一忽略方法上的class参数
