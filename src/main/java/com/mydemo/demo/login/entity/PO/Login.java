@@ -11,15 +11,13 @@ import java.io.Serializable;
 @Data
 public class Login implements Serializable {
 
-
-  private String loginId;
-
+  @ApiModelProperty(value = "用户名", required = true)
   private String username;
 
   @ApiModelProperty(value = "手机号", required = true)
   private String phone;
 
-  @ApiModelProperty(value = "手机号", required = true)
+  @ApiModelProperty(value = "密码", required = true)
   private String password;
 
 
