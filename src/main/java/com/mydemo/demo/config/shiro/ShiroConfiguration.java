@@ -2,13 +2,21 @@ package com.mydemo.demo.config.shiro;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
+import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.crazycake.shiro.RedisCacheManager;
+import org.crazycake.shiro.RedisManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.apache.shiro.mgt.SecurityManager;
+
+import javax.servlet.Filter;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -21,9 +29,22 @@ import java.util.Map;
 @Configuration
 public class ShiroConfiguration {
 
-
+//    注入shiro过滤器
     @Bean(name = "shiroFilter")
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager){
+
+        ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
+
+
+        SecurityUtils.setSecurityManager(securityManager());
+
+        //设置securityManager
+        bean.setSecurityManager(securityManager());
+
+        Map<String, Filter> filters = new HashMap<>();
+        filters.put("jwt", new JWTFilter());
+        bean.setFilters(filters);
+
         log.info("进入shiroFilter......");
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
@@ -37,13 +58,6 @@ public class ShiroConfiguration {
         //<!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
-    }
-
-    @Bean
-    public MyShiroRealm myShiroRealm(){
-        MyShiroRealm myShiroRealm = new MyShiroRealm();
-        //后面这里可以设置缓存的机制
-        return myShiroRealm;
     }
 
     /**
@@ -64,19 +78,63 @@ public class ShiroConfiguration {
 
 
 
-    @Bean
-    public SecurityManager securityManager(){
-        DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
-        securityManager.setRealm(myShiroRealm());
-        return securityManager;
-    }
-
 
     @Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;
+    }
+
+
+
+
+    /**
+     * 注入shiro安全管理器
+     * @param
+     * @return
+     */
+    @Bean("securityManager")
+    public DefaultWebSecurityManager securityManager() {
+        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+
+        securityManager.setRealm(myShiroRealm());//设置自定义realm
+
+        // 关闭 ShiroDAO 功能
+        DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
+        DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = new DefaultSessionStorageEvaluator();
+        // 不需要将 Shiro Session 中的东西存到任何地方（包括 Http Session 中）
+        defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
+        subjectDAO.setSessionStorageEvaluator(defaultSessionStorageEvaluator);
+        securityManager.setSubjectDAO(subjectDAO);
+        // 设置自定义Cache缓存
+        securityManager.setCacheManager(shiroCacheManager());
+
+        return securityManager;
+    }
+
+    @Bean
+    public RedisCacheManager shiroCacheManager(){
+        RedisCacheManager redisCacheManager = new RedisCacheManager();
+        //设置过期时间，默认1800秒
+        redisCacheManager.setExpire(1800);
+
+        //配置redis库
+        RedisManager redisManager = new RedisManager();
+        redisManager.setHost("123.56.229.155:6380");
+        redisManager.setDatabase(0);//放入redis 第一个数据库
+        redisCacheManager.setRedisManager(redisManager);
+        return redisCacheManager;
+    }
+
+
+    /**
+     * 自定义realm
+     * @return
+     */
+    @Bean
+    public MyShiroRealm myShiroRealm() {
+        return new MyShiroRealm();
     }
 
 

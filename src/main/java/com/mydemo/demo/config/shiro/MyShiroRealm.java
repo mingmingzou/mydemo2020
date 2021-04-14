@@ -10,13 +10,23 @@ import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
+import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.subject.WebSubject;
+import org.crazycake.shiro.RedisCacheManager;
+import org.crazycake.shiro.RedisManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 
+import javax.servlet.Filter;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /*
@@ -39,6 +49,7 @@ public class MyShiroRealm extends AuthorizingRealm {
         System.out.println(ret);
     }
 
+    /*授权*/
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         log.info("开始授权(doGetAuthorizationInfo)");
@@ -56,12 +67,12 @@ public class MyShiroRealm extends AuthorizingRealm {
         permissions.add("user:add");
         authorizationInfo.setStringPermissions(permissions);
         return authorizationInfo;
-
     }
 
+    /*验证*/
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        log.info("开始认证(doGetAuthenticationInfo)");
+        log.info("开始认证(doGetAuthenticationInfo)11111111111");
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         //获取用户输入的账号
         String userName = token.getUsername();
@@ -80,8 +91,12 @@ public class MyShiroRealm extends AuthorizingRealm {
         AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(loginDTO, loginDTO.getPassword(),
                 this.getName());
         //放入shiro供credentialsMatcher检验密码
-        log.info("检验密码:"+authenticationInfo);
+        log.debug("检验密码2222:"+authenticationInfo);
         System.out.println("检验密码:"+authenticationInfo);
         return authenticationInfo;
     }
+
+
+
+
 }
