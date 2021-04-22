@@ -1,3 +1,4 @@
+#  mybatis 配置
 spring:
   datasource:
     url: jdbc:mysql://123.56.229.155:3306/mydemo?useUnicode=true&characterEncoding=utf8
@@ -9,6 +10,16 @@ spring:
     port: 6379
     timeout: 10000
     password: Abc123456a.
+
+
+
+#mybatis-plus 配置
+mybatis-plus:
+  type-aliases-package: com.mydemo.demo.modules.*.entity
+  mapper-locations: classpath:mapper/*/*.xml
+  global-config:
+    db-config:
+      logic-delete-value: 1
 
 #   线上
 #    spring:

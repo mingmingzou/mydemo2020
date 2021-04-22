@@ -14,14 +14,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class DemoConfig {
 
-    @Value("${my.ip}")
-    public String ip;
+//    @Value("${.ip}")
+//    public String ip;
 
-    @Value("${my.port}")
+    @Value("${server.port}")
     public String port;
 
-    @Value("${server.servlet.context-path}")
-    public String context_path;
+//    @Value("${server.servlet.context-path}")
+//    public String context_path;
 
 
     /**
@@ -33,6 +33,12 @@ public class DemoConfig {
      */
     public static final Integer ENCRYPT_TIMES = 2;
 
+
+    /**
+    * 盐
+    * */
+    public static final String SALT = "zmm";
+
     /**
      * jwt账户
      */
@@ -40,7 +46,7 @@ public class DemoConfig {
     /**
      * jwt发布者
      */
-    public static final String JWT_ISSUER = "myq";
+    public static final String JWT_ISSUER = "zmm";
     /**
      * jwt时间戳
      */

@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+
 @Api(tags = "登录")
 @RestController
 @RequestMapping(value = "/login")
@@ -34,10 +36,10 @@ public class LoginController {
 
     @ApiOperation("登录：密码登录type=pwd，手机验证码登录type=phone")
     @PostMapping("/login")
-    public Message doLogin(Login login){
+    public Message doLogin(Login login, HttpServletResponse response){
         log.info("进入登录处理");
         log.info("login:"+login);
-        return  loginService.login(login);
+        return  loginService.login(login,response);
     }
     @GetMapping("/aaa")
     public Message aaa(){

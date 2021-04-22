@@ -1,6 +1,9 @@
 package com.mydemo.demo.config.shiro;
 
+import com.mydemo.demo.common.enums.Errcode;
 import com.mydemo.demo.config.BaseConfig;
+import com.mydemo.demo.config.RedisKeys;
+import com.mydemo.demo.config.RedisUtil;
 import com.mydemo.demo.login.entity.DTO.LoginDTO;
 import com.mydemo.demo.login.service.LoginService;
 import io.netty.util.internal.StringUtil;
@@ -21,6 +24,7 @@ import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 
 import javax.servlet.Filter;
 import javax.servlet.http.HttpServletRequest;
@@ -36,8 +40,16 @@ import java.util.Set;
 @Slf4j
 public class MyShiroRealm extends AuthorizingRealm {
 
+
     @Autowired
     LoginService loginService;
+
+    /*
+    * Lazy 第一次使用时才创建对象
+    * */
+    @Lazy
+    @Autowired
+    RedisUtil redisUtil;
 
     public static void main(String[] args) {
         String name = "MD5";
@@ -47,6 +59,12 @@ public class MyShiroRealm extends AuthorizingRealm {
 
         Object ret = new SimpleHash(name, password, salt, times);
         System.out.println(ret);
+    }
+
+    @Override
+    public boolean supports(AuthenticationToken token) {
+        //这个token就是从过滤器中传入的jwtToken
+        return token instanceof JwtToken;
     }
 
     /*授权*/
@@ -72,30 +90,43 @@ public class MyShiroRealm extends AuthorizingRealm {
     /*验证*/
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        log.info("开始认证(doGetAuthenticationInfo)11111111111");
-        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
+        log.info("开始认证(doGetAuthenticationInfo)");
+
+        String token = (String) authenticationToken.getPrincipal();
+        String userName = JwtUtil.getUsername(token);   //通过token获取用户名
+
+
+
+//        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         //获取用户输入的账号
-        String userName = token.getUsername();
+//        String userName = token.getUsername();
         //通过userName去数据库中匹配用户信息，通过查询用户的情况做下面的处理
         //这里暂时就直接写死,根据登录用户账号的情况做处理
         log.info("账号：" + userName);
         LoginDTO loginDTO = null;
         try {
             loginDTO = loginService.getUser(userName);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         if(loginDTO == null || "".equals(loginDTO)){
          throw  new UnknownAccountException("账号不存在");
         }
-        AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(loginDTO, loginDTO.getPassword(),
-                this.getName());
-        //放入shiro供credentialsMatcher检验密码
-        log.debug("检验密码2222:"+authenticationInfo);
-        System.out.println("检验密码:"+authenticationInfo);
-        return authenticationInfo;
-    }
 
+
+        if (!JwtUtil.verify(token) || !redisUtil.hasKey(RedisKeys.PREFIX_SHIRO_REFRESH_TOKEN + userName)
+                || !JwtUtil.isRefreshExpired(token, redisUtil.get(RedisKeys.PREFIX_SHIRO_REFRESH_TOKEN + userName))) {
+            throw new AuthenticationException(Errcode.E_1006.getErrmsg());
+        }
+        //登录认证
+        SimpleAuthenticationInfo simpleAuthenticationInfo =
+                new SimpleAuthenticationInfo(token, token, "jwtRealm");
+        //放入shiro供credentialsMatcher检验密码
+        log.debug("检验密码2222:"+simpleAuthenticationInfo);
+        System.out.println("检验密码:"+simpleAuthenticationInfo);
+        return simpleAuthenticationInfo;
+    }
 
 
 
