@@ -1,0 +1,158 @@
+2020-08-21 15:10:37.076 debug 22160 --- [main] com.mydemo.demo.DemoApplication          : Starting DemoApplication on USER-20190823PG with PID 22160 (C:\Users\Administrator\Desktop\mySpringBoot\target\classes started by Administrator in C:\Users\Administrator\Desktop\mySpringBoot)
+2020-08-21 15:10:37.092 debug 22160 --- [main] com.mydemo.demo.DemoApplication          : No active profile set, falling back to default profiles: default
+2020-08-21 15:10:38.384 debug 22160 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+java.lang.IllegalStateException: Error processing condition on org.springframework.boot.autoconfigure.context.PropertyPlaceholderAutoConfiguration.propertySourcesPlaceholderConfigurer
+	at org.springframework.boot.autoconfigure.condition.SpringBootCondition.matches(SpringBootCondition.java:60) ~[spring-boot-autoconfigure-2.3.2.RELEASE.jar:2.3.2.RELEASE]
+	at org.springframework.context.annotation.ConditionEvaluator.shouldSkip(ConditionEvaluator.java:108) ~[spring-context-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsForBeanMethod(ConfigurationClassBeanDefinitionReader.java:184) ~[spring-context-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsForConfigurationClass(ConfigurationClassBeanDefinitionReader.java:144) ~[spring-context-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitions(ConfigurationClassBeanDefinitionReader.java:120) ~[spring-context-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:331) ~[spring-context-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:236) ~[spring-context-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:280) ~[spring-context-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:96) ~[spring-context-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:707) ~[spring-context-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.__refresh(AbstractApplicationContext.java:533) ~[spring-context-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.jrLockAndRefresh(AbstractApplicationContext.java:40002) ~[spring-context-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:41008) ~[spring-context-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-2.3.2.RELEASE.jar:2.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:758) [spring-boot-2.3.2.RELEASE.jar:2.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:750) [spring-boot-2.3.2.RELEASE.jar:2.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) [spring-boot-2.3.2.RELEASE.jar:2.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315) [spring-boot-2.3.2.RELEASE.jar:2.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237) [spring-boot-2.3.2.RELEASE.jar:2.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) [spring-boot-2.3.2.RELEASE.jar:2.3.2.RELEASE]
+	at com.mydemo.demo.DemoApplication.main(DemoApplication.java:13) [classes/:na]
+Caused by: java.lang.IllegalStateException: Failed to introspect Class [com.mydemo.demo.config.shiro.ShiroConfiguration] from ClassLoader [sun.misc.Launcher$AppClassLoader@18b4aac2]
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:481) ~[spring-core-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.util.ReflectionUtils.doWithMethods(ReflectionUtils.java:358) ~[spring-core-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.util.ReflectionUtils.getUniqueDeclaredMethods(ReflectionUtils.java:414) ~[spring-core-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.lambda$getTypeForFactoryMethod$2(AbstractAutowireCapableBeanFactory.java:742) ~[spring-beans-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1660) ~[na:1.8.0_171]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.getTypeForFactoryMethod(AbstractAutowireCapableBeanFactory.java:741) ~[spring-beans-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineTargetType(AbstractAutowireCapableBeanFactory.java:680) ~[spring-beans-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.predictBeanType(AbstractAutowireCapableBeanFactory.java:648) ~[spring-beans-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:1614) ~[spring-beans-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doGetBeanNamesForType(DefaultListableBeanFactory.java:523) ~[spring-beans-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeanNamesForType(DefaultListableBeanFactory.java:495) ~[spring-beans-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.boot.autoconfigure.condition.OnBeanCondition.collectBeanNamesForType(OnBeanCondition.java:238) ~[spring-boot-autoconfigure-2.3.2.RELEASE.jar:2.3.2.RELEASE]
+	at org.springframework.boot.autoconfigure.condition.OnBeanCondition.getBeanNamesForType(OnBeanCondition.java:231) ~[spring-boot-autoconfigure-2.3.2.RELEASE.jar:2.3.2.RELEASE]
+	at org.springframework.boot.autoconfigure.condition.OnBeanCondition.getBeanNamesForType(OnBeanCondition.java:221) ~[spring-boot-autoconfigure-2.3.2.RELEASE.jar:2.3.2.RELEASE]
+	at org.springframework.boot.autoconfigure.condition.OnBeanCondition.getMatchingBeans(OnBeanCondition.java:169) ~[spring-boot-autoconfigure-2.3.2.RELEASE.jar:2.3.2.RELEASE]
+	at org.springframework.boot.autoconfigure.condition.OnBeanCondition.getMatchOutcome(OnBeanCondition.java:144) ~[spring-boot-autoconfigure-2.3.2.RELEASE.jar:2.3.2.RELEASE]
+	at org.springframework.boot.autoconfigure.condition.SpringBootCondition.matches(SpringBootCondition.java:47) ~[spring-boot-autoconfigure-2.3.2.RELEASE.jar:2.3.2.RELEASE]
+	... 20 common frames omitted
+Caused by: java.lang.NoClassDefFoundError: org/thymeleaf/dialect/AbstractProcessorDialect
+	at java.lang.ClassLoader.defineClass1(ClassLoader.java) ~[na:1.8.0_171]
+	at java.lang.ClassLoader._jr$defineClass(ClassLoader.java:763) ~[na:1.8.0_171]
+	at java.lang.ClassLoader.defineClass(ClassLoader.java:43016) ~[na:1.8.0_171]
+	at java.security.SecureClassLoader.defineClass(SecureClassLoader.java:142) ~[na:1.8.0_171]
+	at java.net.URLClassLoader.defineClass(URLClassLoader.java:467) ~[na:1.8.0_171]
+	at java.net.URLClassLoader.access$100(URLClassLoader.java:73) ~[na:1.8.0_171]
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:368) ~[na:1.8.0_171]
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:362) ~[na:1.8.0_171]
+	at java.security.AccessController.doPrivileged(Native Method) ~[na:1.8.0_171]
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:361) ~[na:1.8.0_171]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:424) ~[na:1.8.0_171]
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:349) ~[na:1.8.0_171]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357) ~[na:1.8.0_171]
+	at java.lang.Class.getDeclaredMethods0(Native Method) ~[na:1.8.0_171]
+	at java.lang.Class.privateGetDeclaredMethods(Class.java:2701) ~[na:1.8.0_171]
+	at java.lang.Class.getDeclaredMethods(Class.java:1975) ~[na:1.8.0_171]
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:463) ~[spring-core-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	... 36 common frames omitted
+Caused by: java.lang.ClassNotFoundException: org.thymeleaf.dialect.AbstractProcessorDialect
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:381) ~[na:1.8.0_171]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:424) ~[na:1.8.0_171]
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:349) ~[na:1.8.0_171]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357) ~[na:1.8.0_171]
+	... 53 common frames omitted
+
+2020-08-21 15:10:38.404 debug 22160 --- [main] o.s.boot.SpringApplication               : Unable to close ApplicationContext
+
+java.lang.IllegalStateException: Failed to introspect Class [com.mydemo.demo.config.shiro.ShiroConfiguration] from ClassLoader [sun.misc.Launcher$AppClassLoader@18b4aac2]
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:481) ~[spring-core-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.util.ReflectionUtils.doWithMethods(ReflectionUtils.java:358) ~[spring-core-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.util.ReflectionUtils.getUniqueDeclaredMethods(ReflectionUtils.java:414) ~[spring-core-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.lambda$getTypeForFactoryMethod$2(AbstractAutowireCapableBeanFactory.java:742) ~[spring-beans-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1660) ~[na:1.8.0_171]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.getTypeForFactoryMethod(AbstractAutowireCapableBeanFactory.java:741) ~[spring-beans-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineTargetType(AbstractAutowireCapableBeanFactory.java:680) ~[spring-beans-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.predictBeanType(AbstractAutowireCapableBeanFactory.java:648) ~[spring-beans-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:1614) ~[spring-beans-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doGetBeanNamesForType(DefaultListableBeanFactory.java:523) ~[spring-beans-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeanNamesForType(DefaultListableBeanFactory.java:495) ~[spring-beans-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:620) ~[spring-beans-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:612) ~[spring-beans-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBeansOfType(AbstractApplicationContext.java:1243) ~[spring-context-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	at org.springframework.boot.SpringApplication.getExitCodeFromMappedException(SpringApplication.java:880) [spring-boot-2.3.2.RELEASE.jar:2.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.getExitCodeFromException(SpringApplication.java:868) [spring-boot-2.3.2.RELEASE.jar:2.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.handleExitCode(SpringApplication.java:855) [spring-boot-2.3.2.RELEASE.jar:2.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.handleRunFailure(SpringApplication.java:806) [spring-boot-2.3.2.RELEASE.jar:2.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:325) [spring-boot-2.3.2.RELEASE.jar:2.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237) [spring-boot-2.3.2.RELEASE.jar:2.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) [spring-boot-2.3.2.RELEASE.jar:2.3.2.RELEASE]
+	at com.mydemo.demo.DemoApplication.main(DemoApplication.java:13) [classes/:na]
+Caused by: java.lang.NoClassDefFoundError: org/thymeleaf/dialect/AbstractProcessorDialect
+	at java.lang.ClassLoader.defineClass1(ClassLoader.java) ~[na:1.8.0_171]
+	at java.lang.ClassLoader._jr$defineClass(ClassLoader.java:763) ~[na:1.8.0_171]
+	at java.lang.ClassLoader.defineClass(ClassLoader.java:43016) ~[na:1.8.0_171]
+	at java.security.SecureClassLoader.defineClass(SecureClassLoader.java:142) ~[na:1.8.0_171]
+	at java.net.URLClassLoader.defineClass(URLClassLoader.java:467) ~[na:1.8.0_171]
+	at java.net.URLClassLoader.access$100(URLClassLoader.java:73) ~[na:1.8.0_171]
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:368) ~[na:1.8.0_171]
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:362) ~[na:1.8.0_171]
+	at java.security.AccessController.doPrivileged(Native Method) ~[na:1.8.0_171]
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:361) ~[na:1.8.0_171]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:424) ~[na:1.8.0_171]
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:349) ~[na:1.8.0_171]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357) ~[na:1.8.0_171]
+	at java.lang.Class.getDeclaredMethods0(Native Method) ~[na:1.8.0_171]
+	at java.lang.Class.privateGetDeclaredMethods(Class.java:2701) ~[na:1.8.0_171]
+	at java.lang.Class.getDeclaredMethods(Class.java:1975) ~[na:1.8.0_171]
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:463) ~[spring-core-5.2.8.RELEASE.jar:5.2.8.RELEASE]
+	... 21 common frames omitted
+Caused by: java.lang.ClassNotFoundException: org.thymeleaf.dialect.AbstractProcessorDialect
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:381) ~[na:1.8.0_171]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:424) ~[na:1.8.0_171]
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:349) ~[na:1.8.0_171]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357) ~[na:1.8.0_171]
+	... 38 common frames omitted
+
+2020-08-21 15:12:39.531 debug 17756 --- [main] com.mydemo.demo.DemoApplication          : Starting DemoApplication on USER-20190823PG with PID 17756 (C:\Users\Administrator\Desktop\mySpringBoot\target\classes started by Administrator in C:\Users\Administrator\Desktop\mySpringBoot)
+2020-08-21 15:12:39.536 debug 17756 --- [main] com.mydemo.demo.DemoApplication          : No active profile set, falling back to default profiles: default
+2020-08-21 15:12:41.075 debug 17756 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-08-21 15:12:41.085 debug 17756 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-08-21 15:12:41.179 debug 17756 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 40ms. Found 0 Redis repository interfaces.
+2020-08-21 15:12:41.868 debug 17756 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'shiroConfiguration' of type [com.mydemo.demo.config.shiro.ShiroConfiguration$$EnhancerBySpringCGLIB$$1] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-08-21 15:12:42.144 debug 17756 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'myShiroRealm' of type [com.mydemo.demo.config.shiro.MyShiroRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-08-21 15:12:42.156 debug 17756 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'securityManager' of type [org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-08-21 15:12:42.162 debug 17756 --- [main] c.mydemo.demo.config.ShiroConfiguration  : 进入shiroFilter......
+2020-08-21 15:12:42.851 debug 17756 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2020-08-21 15:12:42.875 debug 17756 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-08-21 15:12:42.876 debug 17756 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.37]
+2020-08-21 15:12:43.121 debug 17756 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-08-21 15:12:43.122 debug 17756 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3499 ms
+2020-08-21 15:12:45.202 debug 17756 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-08-21 15:12:47.149 debug 17756 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2020-08-21 15:12:47.787 debug 17756 --- [main] s.a.ScheduledAnnotationBeanPostProcessor : No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2020-08-21 15:12:47.845 debug 17756 --- [main] com.mydemo.demo.DemoApplication          : Started DemoApplication in 9.846 seconds (JVM running for 16.702)
+2020-08-21 15:12:56.260 debug 17756 --- [http-nio-8081-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-08-21 15:12:56.261 debug 17756 --- [http-nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-08-21 15:12:56.286 debug 17756 --- [http-nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 24 ms
+2020-08-21 15:13:03.855 debug 17756 --- [http-nio-8081-exec-2] c.m.d.login.controller.LoginController   : 进入login页面
+2020-08-21 15:13:28.076 debug 17756 --- [http-nio-8081-exec-3] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.mydemo.demo.*.mapper]' package. Please check your configuration.
+2020-08-21 15:13:28.077 debug 17756 --- [http-nio-8081-exec-3] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-08-21 15:13:28.110 debug 17756 --- [http-nio-8081-exec-3] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 21ms. Found 0 Redis repository interfaces.
+2020-08-21 15:13:28.331 debug 17756 --- [http-nio-8081-exec-3] c.m.d.login.controller.LoginController   : 进入login页面
+2020-08-21 15:13:29.625 debug 17756 --- [http-nio-8081-exec-4] c.m.d.login.controller.LoginController   : 进入login页面
+2020-08-21 15:26:29.516 debug 17756 --- [http-nio-8081-exec-7] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.mydemo.demo.*.mapper]' package. Please check your configuration.
+2020-08-21 15:26:29.516 debug 17756 --- [http-nio-8081-exec-7] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-08-21 15:26:29.529 debug 17756 --- [http-nio-8081-exec-7] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 12ms. Found 0 Redis repository interfaces.
+2020-08-21 15:26:29.654 debug 17756 --- [http-nio-8081-exec-7] c.m.d.login.controller.LoginController   : 进入login页面
+2020-08-21 15:27:08.903 debug 17756 --- [http-nio-8081-exec-8] c.m.d.login.controller.LoginController   : 进入登录处理
+2020-08-21 15:27:08.904 debug 17756 --- [http-nio-8081-exec-8] c.m.d.login.controller.LoginController   : exceptionClassName:null
+2020-08-21 15:27:10.605 debug 17756 --- [http-nio-8081-exec-9] c.m.d.login.controller.LoginController   : 进入登录处理
+2020-08-21 15:27:10.606 debug 17756 --- [http-nio-8081-exec-9] c.m.d.login.controller.LoginController   : exceptionClassName:null
+2020-08-21 15:45:41.862 debug 17756 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'

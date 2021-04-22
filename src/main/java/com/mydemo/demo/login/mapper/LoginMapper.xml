@@ -10,16 +10,19 @@
     <sql id="Field">
 		login_id,
 		username,
-		password
+		password,
+		phone
 	</sql>
 
-    <resultMap id="loginInfo" type="com.mydemo.demo.login.entity.PO.Login">
+    <resultMap id="loginInfo" type="com.mydemo.demo.login.entity.DTO.LoginDTO">
         <id property="loginId" column="login_id" javaType="java.lang.String"/>
         <result property="username" column="username" javaType="java.lang.String"/>
         <result property="password" column="password" javaType="java.lang.String"/>
+        <result property="phone" column="phone" javaType="java.lang.String"/>
     </resultMap>
 
-    <select id="login" resultMap="loginInfo">
+    <select id="login" parameterType="java.lang.String" resultMap="loginInfo">
         select <include refid="Field"></include> from <include refid="tableName"></include>
+        where  username = #{username} or phone = #{username}
     </select>
 </mapper>

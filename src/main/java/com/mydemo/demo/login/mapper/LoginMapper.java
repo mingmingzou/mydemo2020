@@ -1,11 +1,9 @@
 package com.mydemo.demo.login.mapper;
 
-import com.mydemo.demo.login.entity.PO.Login;
+import com.mydemo.demo.login.entity.DTO.LoginDTO;
 import org.apache.ibatis.annotations.Mapper;
-
-import java.util.List;
 
 @Mapper
 public interface LoginMapper {
-    List<Login> login();
+    LoginDTO login(String username);
 }
