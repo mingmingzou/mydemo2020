@@ -32,7 +32,7 @@ public class MyShiroRealm extends AuthorizingRealm {
         //权限
         Set<String> permissions = new HashSet<String>();
         permissions.add("user:list");
-        //permissions.add("user:add");;
+        //permissions.add("user:add");
         authorizationInfo.setStringPermissions(permissions);
         return authorizationInfo;
 
