@@ -10,7 +10,11 @@ spring:
     port: 6379
     timeout: 10000
     password: Abc123456a.
-
+    lettuce:
+      pool:
+        max-active: 200
+        max-idle: 8
+        min-idle: 0
 
 
 #mybatis-plus 配置

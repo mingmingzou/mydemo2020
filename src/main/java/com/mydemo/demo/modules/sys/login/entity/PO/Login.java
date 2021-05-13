@@ -1,4 +1,4 @@
-package com.mydemo.demo.login.entity.PO;
+package com.mydemo.demo.modules.sys.login.entity.PO;
 
 
 import io.swagger.annotations.ApiModel;
@@ -10,6 +10,8 @@ import java.io.Serializable;
 @ApiModel("用户登录类")
 @Data
 public class Login implements Serializable {
+
+  private static final long serialVersionUID = 1L;
 
   @ApiModelProperty(value = "用户名", required = true)
   private String username;

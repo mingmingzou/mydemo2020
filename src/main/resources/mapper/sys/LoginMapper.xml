@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mydemo.demo.login.mapper.LoginMapper">
+<mapper namespace="com.mydemo.demo.modules.sys.login.mapper.LoginMapper">
     <sql id="tableName">
-        login
+        sys_user
     </sql>
     <!-- 字段 -->
     <sql id="Field">
@@ -14,7 +14,7 @@
 		phone
 	</sql>
 
-    <resultMap id="loginInfo" type="com.mydemo.demo.login.entity.DTO.LoginDTO">
+    <resultMap id="loginInfo" type="com.mydemo.demo.modules.sys.login.entity.DTO.LoginDTO">
         <id property="loginId" column="login_id" javaType="java.lang.String"/>
         <result property="username" column="username" javaType="java.lang.String"/>
         <result property="password" column="password" javaType="java.lang.String"/>

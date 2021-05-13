@@ -1,36 +1,24 @@
 package com.mydemo.demo.config.shiro;
 
 import com.mydemo.demo.common.enums.Errcode;
-import com.mydemo.demo.config.BaseConfig;
 import com.mydemo.demo.config.RedisKeys;
 import com.mydemo.demo.config.RedisUtil;
-import com.mydemo.demo.login.entity.DTO.LoginDTO;
-import com.mydemo.demo.login.service.LoginService;
-import io.netty.util.internal.StringUtil;
+import com.mydemo.demo.modules.sys.login.entity.DTO.LoginDTO;
+import com.mydemo.demo.modules.sys.login.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.crypto.hash.SimpleHash;
-import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
-import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.realm.AuthorizingRealm;
-import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.subject.WebSubject;
-import org.crazycake.shiro.RedisCacheManager;
-import org.crazycake.shiro.RedisManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 
-import javax.servlet.Filter;
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 /*
@@ -52,13 +40,20 @@ public class MyShiroRealm extends AuthorizingRealm {
     RedisUtil redisUtil;
 
     public static void main(String[] args) {
-        String name = "MD5";
-        Object password = "admin";
-        Object salt = "zmm";
-        int times = 2;
+//        String name = "MD5";
+//        Object password = "admin";
+//        Object salt = "zmm";
+//        int times = 2;
+//
+//        Object ret = new SimpleHash(name, password, salt, times);
+//        System.out.println(ret);
 
-        Object ret = new SimpleHash(name, password, salt, times);
-        System.out.println(ret);
+
+//        if (!JwtUtil.verify(token) || !redisUtil.hasKey(RedisKeys.PREFIX_SHIRO_REFRESH_TOKEN + userName)
+//                || !JwtUtil.isRefreshExpired(token, redisUtil.get(RedisKeys.PREFIX_SHIRO_REFRESH_TOKEN + userName))
+
+//        redisUtil.set(RedisKeys.PREFIX_SHIRO_REFRESH_TOKEN + "admin","1");
+//        System.out.println(redisUtil.get(RedisKeys.PREFIX_SHIRO_REFRESH_TOKEN + "admin"));
     }
 
     @Override
@@ -95,13 +90,6 @@ public class MyShiroRealm extends AuthorizingRealm {
         String token = (String) authenticationToken.getPrincipal();
         String userName = JwtUtil.getUsername(token);   //通过token获取用户名
 
-
-
-//        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        //获取用户输入的账号
-//        String userName = token.getUsername();
-        //通过userName去数据库中匹配用户信息，通过查询用户的情况做下面的处理
-        //这里暂时就直接写死,根据登录用户账号的情况做处理
         log.info("账号：" + userName);
         LoginDTO loginDTO = null;
         try {
@@ -113,7 +101,6 @@ public class MyShiroRealm extends AuthorizingRealm {
         if(loginDTO == null || "".equals(loginDTO)){
          throw  new UnknownAccountException("账号不存在");
         }
-
 
         if (!JwtUtil.verify(token) || !redisUtil.hasKey(RedisKeys.PREFIX_SHIRO_REFRESH_TOKEN + userName)
                 || !JwtUtil.isRefreshExpired(token, redisUtil.get(RedisKeys.PREFIX_SHIRO_REFRESH_TOKEN + userName))) {

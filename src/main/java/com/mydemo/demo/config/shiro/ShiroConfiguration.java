@@ -46,18 +46,26 @@ public class ShiroConfiguration {
         bean.setFilters(filters);
 
         log.info("进入shiroFilter......");
-        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-        shiroFilterFactoryBean.setSecurityManager(securityManager);
-        shiroFilterFactoryBean.setLoginUrl("/login/login2"); //未登录拦截页面
-        shiroFilterFactoryBean.setSuccessUrl("/login/loginsuss");//登录成功跳转页面
+
+
+        /**
+         * anon：匿名用户可访问
+         * authc：认证用户可访问
+         * user：使用rememberMe可访问
+         * perms：对应权限可访问
+         * role：对应角色权限可访问
+         */
+
+        bean.setSecurityManager(securityManager);
         //设置不需要拦截的路径
-        Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
+        LinkedHashMap<String,String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         //配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
         filterChainDefinitionMap.put("/login/login", "anon");
-        filterChainDefinitionMap.put("/login/**", "authc");
+//        filterChainDefinitionMap.put("/login/**", "authc");
         //<!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
-        return shiroFilterFactoryBean;
+        filterChainDefinitionMap.put("/**", "jwt");
+        bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+        return bean;
     }
 
     /**

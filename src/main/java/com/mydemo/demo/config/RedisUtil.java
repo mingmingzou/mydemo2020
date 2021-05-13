@@ -193,9 +193,16 @@ public class RedisUtil {
      * 设置指定 key 的值，有过期时间
      * @param key
      * @param value
+     * * @param unit
+     *      *            时间单位, 天:TimeUnit.DAYS 小时:TimeUnit.HOURS 分钟:TimeUnit.MINUTES
+     *      *            秒:TimeUnit.SECONDS 毫秒:TimeUnit.MILLISECONDS
      */
-    public void set(String key, Object value, Integer expireTime) {
-        redisTemplate.opsForValue().set(key, value, expireTime);
+//    public void set(String key, Object value, Integer expireTime) {
+//        redisTemplate.opsForValue().set(key, value, expireTime);
+//    }
+
+    public void set(String key, Object value, Integer expireTime,TimeUnit  utit) {
+        redisTemplate.opsForValue().set(key, value, expireTime, utit);
     }
 
     /**

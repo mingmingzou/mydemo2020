@@ -1,8 +1,6 @@
-package com.mydemo.demo.login.entity.DTO;
+package com.mydemo.demo.modules.sys.login.entity.DTO;
 
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;

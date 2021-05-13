@@ -1,9 +1,9 @@
-package com.mydemo.demo.login.service;
+package com.mydemo.demo.modules.sys.login.service;
 
 
 import com.mydemo.demo.common.entity.Message;
-import com.mydemo.demo.login.entity.DTO.LoginDTO;
-import com.mydemo.demo.login.entity.PO.Login;
+import com.mydemo.demo.modules.sys.login.entity.DTO.LoginDTO;
+import com.mydemo.demo.modules.sys.login.entity.PO.Login;
 
 import javax.servlet.http.HttpServletResponse;
 
